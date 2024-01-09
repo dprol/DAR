@@ -1,61 +1,85 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import '../css/hangman.css';
 
-const palabras = ['react', 'javascript', 'ahorcado', 'programacion', 'web'];
-const maxIntentos = 6;
-
-function Hangman() {
-  const [palabra, setPalabra] = useState('');
-  const [mostrar, setMostrar] = useState('');
-  const [intentos, setIntentos] = useState(maxIntentos);
-  const [letrasUsadas, setLetrasUsadas] = useState([]);
+const App = () => {
+  const words = ["casa", "codigo", "ordenador", "lampara", "mesa", "perro"];
+  const [selectedWord, setSelectedWord] = useState(words[Math.floor(Math.random() * words.length)]);
+  const [guessedWord, setGuessedWord] = useState(Array(selectedWord.length).fill("_"));
+  const [wrongLetters, setWrongLetters] = useState([]);
+  const [attempts, setAttempts] = useState(5);
 
   useEffect(() => {
-    // Seleccionar una palabra al azar al inicio
-    const palabraAleatoria = palabras[Math.floor(Math.random() * palabras.length)];
-    setPalabra(palabraAleatoria);
-    setMostrar('_'.repeat(palabraAleatoria.length));
-  }, []);
+    displayWord();
+    displayHangman();
+    document.addEventListener("keydown", handleKeyPress);
 
-  const adivinarLetra = (letra) => {
-    if (letrasUsadas.includes(letra) || intentos === 0 || mostrar === palabra) {
-      return;
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [selectedWord, guessedWord, wrongLetters, attempts]);
+
+  const displayWord = () => {
+    document.getElementById("palabra").textContent = guessedWord.join(" ");
+  };
+
+  const displayHangman = () => {
+    document.getElementById("Ahorcado").style.backgroundImage = `url('imagenes/hangman.png')`;
+  };
+
+  const displayWrongLetters = () => {
+    document.getElementById("letras_dichas").textContent = `Letras incorrectas: ${wrongLetters.join(", ")}`;
+  };
+
+  const checkWin = () => {
+    if (!guessedWord.includes("_")) {
+      document.getElementById("mensaje").textContent = "¡Ganaste!";
+      document.getElementById("mensaje").style.color = "green";
+      document.removeEventListener("keydown", handleKeyPress);
     }
+  };
 
-    let acierto = false;
-    const mostrarArray = mostrar.split('');
+  const checkLoss = () => {
+    if (attempts === 0) {
+      document.getElementById("mensaje").textContent = `Perdiste. La palabra era "${selectedWord}".`;
+      document.getElementById("mensaje").style.color = "red";
+      document.removeEventListener("keydown", handleKeyPress);
+    }
+  };
 
-    for (let i = 0; i < palabra.length; i++) {
-      if (palabra[i] === letra) {
-        mostrarArray[i] = letra;
-        acierto = true;
+  const handleKeyPress = (event) => {
+    const letter = event.key.toLowerCase();
+
+    if (/^[a-z]$/.test(letter)) {
+      if (selectedWord.includes(letter)) {
+        selectedWord.split("").forEach((char, index) => {
+          if (char === letter) {
+            guessedWord[index] = letter;
+          }
+        });
+        displayWord();
+        checkWin();
+      } else {
+        if (!wrongLetters.includes(letter)) {
+          setWrongLetters([...wrongLetters, letter]);
+          setAttempts(attempts - 1);
+          displayHangman();
+          displayWrongLetters();
+          checkLoss();
+        }
       }
-    }
-
-    setMostrar(mostrarArray.join(''));
-    setLetrasUsadas(prev => [...prev, letra]);
-
-    if (!acierto) {
-      setIntentos(prev => prev - 1);
     }
   };
 
   return (
-    <div>
-      <h2>Ahorcado</h2>
-      <p>Intentos restantes: {intentos}</p>
-      <p>{mostrar}</p>
-      <p>Letras usadas: {letrasUsadas.join(', ')}</p>
-      <div>
-        {'abcdefghijklmnopqrstuvwxyz'.split('').map(letra => (
-          <button key={letra} onClick={() => adivinarLetra(letra)} disabled={letrasUsadas.includes(letra)}>
-            {letra}
-          </button>
-        ))}
+    <div className="App">
+      <div id="inicial">
+        <div id="palabra"></div>
+        <div id="Ahorcado"></div>
+        <div id="letras_dichas"></div>
+        <p id="mensaje"></p>
       </div>
-      {intentos === 0 && <p>¡Juego terminado! La palabra era: {palabra}</p>}
-      {mostrar === palabra && <p>¡Felicidades! Adivinaste la palabra.</p>}
     </div>
   );
-}
+};
 
-export default Hangman;
+export default App;

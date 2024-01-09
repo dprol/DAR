@@ -1,48 +1,207 @@
-body {
-    font-family: 'Press Start 2P', cursive; /* Una fuente que recuerda a los videojuegos clásicos */
-    background-color: #f0f0f0; /* Un fondo claro para resaltar los colores */
-    color: #333; /* Color de texto oscuro para contraste */
-    text-align: center; /* Centrar el contenido */
-  }
+.App {
+  text-align: center;
+  background-color: #00000000;
   
-  h1 {
-    color: #ff00ff; /* Color brillante para el título */
-    text-shadow: 3px 3px 0px #000; /* Sombra de texto para un efecto retro */
-  }
+}
+
+.App-header {
+  background-color: #0044cd00;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: rgba(255, 255, 255, 0);
   
-  nav ul {
-    list-style-type: none; /* Eliminar los puntos de la lista */
-    padding: 0;
-  }
+}
+
+.App-link {
+  color: #0543af;
   
-  nav li {
-    display: inline; /* Mostrar enlaces en línea */
-    margin-right: 20px;
-  }
+}
+
+section {
+  background-color: #00000000;
   
-  a {
-    color: #00ff00; /* Color de enlace brillante */
-    text-decoration: none; /* Sin subrayado */
-    font-size: 1.5em;
-  }
+}
+
+.navBg {
+  background-color: #000000ce;
+  /* Ocupar todo el espacio en pantalla */
+  width: 100%;
+  align-items: center;
+  justify-content: center;
   
-  a:hover {
-    color: #ff0000; /* Cambio de color al pasar el ratón */
-  }
+}
+
+.navbar-toggler{
+  width: 100px;
+  justify-content: center;
   
-  button {
-    background-color: #0000ff; /* Fondo de botón azul */
-    color: #fff; /* Texto blanco */
-    border: none;
-    padding: 10px 20px;
-    margin: 10px;
-    cursor: pointer;
-  }
   
-  button:hover {
-    background-color: #555; /* Cambiar color de fondo al pasar el ratón */
-  }
+}
+
+.fondo-navbar {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  align-items: center;
+  align-items: center;
+  z-index: 20;
   
-  /* Estilos adicionales para los juegos específicos pueden ir aquí */
-  /* Por ejemplo, estilos para el juego Snake, Hangman, etc. */
+}
+
+.card {
+  padding: 10px;
+  border-radius: 15px;
+  margin: 5%;
+  width: 90%;
+  border: 1px solid #616161;
+  background-color: #ffffff93;
+  z-index:10;
+ 
+}
+
+.card-text {
+  display: flex;
+  flex-direction: column;
+  color: #202020;
+}
+
+.g-4 {
+  display: flex;
+  flex-direction: row;
   
+}
+
+.square {
+  background: rgb(87, 190, 185);
+  height: 5rem;
+  width: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  font-size: 4rem;
+  z-index: 10;
+}
+
+.square:hover {
+  background: rgb(255, 255, 255);
+}
+
+.square.clicked {
+  background: rgb(34, 80, 123);
+  cursor: not-allowed;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  align-items: center;
+  justify-content: center;
+  grid-gap: 5px;
+}
+
+.end-game-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 100;
+}
+
+.btn {
+  background: rgb(0, 0, 0);
+  color: rgb(208, 213, 255);
+  border: 2px solid rgb(214, 235, 255);
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  padding: 10px 14px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s ease-out;
+  max-height: 7rem;
+}
+
+.btn:hover {
+  background: rgb(63, 118, 170);
+  color: rgb(27, 255, 255);
+  border: 2px solid rgb(27, 255, 255);
+}
+
+.win-text {
+  color: white;
+  font-size: 5rem;
+}
+
+.win-history {
+  color: white;
+  font-size: 2rem;
+  margin: 2rem 0;
+}
+
+.no-bullets {
+  list-style-type: none;
+}
+
+h1 {
+  padding-top: 100px;
+  font-family: 'VT323';
+}
+
+.card-adivina {
+  padding: 10px;
+  border-radius: 15px;
+  border-color: #616161;
+  border: 1px solid; 
+  margin: 5%;
+  width: 90%;
+  background-color: #e3e3e3;
+  max-width: 800px;
+}
+
+/* .card-contacto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 600px;
+  border: none;
+  background-color: #00000000;
+} */
+
+.imagen-fondo {
+  z-index: -10;
+  position: fixed;
+  width: auto;
+  min-height: 100%;
+}
+
+.fondo1 {
+  width: 100%;
+  height: auto;
+  opacity: 70%;
+  display: flex;
+}
+
+.div-fondo {
+  width: 100%;
+  background-repeat: repeat;
+}
+
+.carousel-image {
+  margin-bottom: 100px;
+}
+
+.win-history {
+  color: black;
+  opacity: 0.8;
+}

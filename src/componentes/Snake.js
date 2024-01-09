@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import '../css/Snake.css';
 
 const inicialSnake = [{ x: 2, y: 2 }];
 const inicialComida = { x: 5, y: 5 };
