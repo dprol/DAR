@@ -1,47 +1,52 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../css/hangman.css';
+import { Link } from 'react-router-dom';
 
 const App = () => {
-  const words = ["casa", "codigo", "ordenador", "lampara", "mesa", "perro"];
-  const [selectedWord, setSelectedWord] = useState(words[Math.floor(Math.random() * words.length)]);
+  const initialWords = ["casa", "codigo", "ordenador", "lampara", "mesa", "perro"];
+  const [selectedWord, setSelectedWord] = useState(initialWords[Math.floor(Math.random() * initialWords.length)]);
   const [guessedWord, setGuessedWord] = useState(Array(selectedWord.length).fill("_"));
   const [wrongLetters, setWrongLetters] = useState([]);
   const [attempts, setAttempts] = useState(5);
+  const [message, setMessage] = useState('');
 
-  useEffect(() => {
-    displayWord();
-    displayHangman();
+  const resetGame = () => {
+    // Seleccionar una nueva palabra al azar
+    const newSelectedWord = initialWords[Math.floor(Math.random() * initialWords.length)];
+    setSelectedWord(newSelectedWord);
+
+    // Reiniciar las variables de estado
+    setGuessedWord(Array(newSelectedWord.length).fill("_"));
+    setWrongLetters([]);
+    setAttempts(5);
+    setMessage('');
+
+    // Agregar nuevamente el evento keydown
     document.addEventListener("keydown", handleKeyPress);
-
-    return () => {
-      document.removeEventListener("keydown", handleKeyPress);
-    };
-  }, [selectedWord, guessedWord, wrongLetters, attempts]);
+  };
 
   const displayWord = () => {
-    document.getElementById("palabra").textContent = guessedWord.join(" ");
+    return guessedWord.join(" ");
   };
 
   const displayHangman = () => {
-    document.getElementById("Ahorcado").style.backgroundImage = `url('imagenes/hangman.png')`;
+    return `url('imagenes/hangman_${attempts}.png')`;
   };
 
   const displayWrongLetters = () => {
-    document.getElementById("letras_dichas").textContent = `Letras incorrectas: ${wrongLetters.join(", ")}`;
+    return `Letras incorrectas: ${wrongLetters.join(", ")}`;
   };
 
-  const checkWin = () => {
-    if (!guessedWord.includes("_")) {
-      document.getElementById("mensaje").textContent = "¡Ganaste!";
-      document.getElementById("mensaje").style.color = "green";
+  const checkWin = (newGuessedWord) => {
+    if (!newGuessedWord.includes("_")) {
+      setMessage("¡Ganaste!");
       document.removeEventListener("keydown", handleKeyPress);
     }
   };
 
   const checkLoss = () => {
     if (attempts === 0) {
-      document.getElementById("mensaje").textContent = `Perdiste. La palabra era "${selectedWord}".`;
-      document.getElementById("mensaje").style.color = "red";
+      setMessage(`Perdiste. La palabra era "${selectedWord}".`);
       document.removeEventListener("keydown", handleKeyPress);
     }
   };
@@ -51,32 +56,42 @@ const App = () => {
 
     if (/^[a-z]$/.test(letter)) {
       if (selectedWord.includes(letter)) {
-        selectedWord.split("").forEach((char, index) => {
-          if (char === letter) {
-            guessedWord[index] = letter;
-          }
-        });
-        displayWord();
-        checkWin();
+        const newGuessedWord = guessedWord.map((char, index) => (selectedWord[index] === letter ? letter : char));
+        setGuessedWord(newGuessedWord);
+        checkWin(newGuessedWord);
       } else {
         if (!wrongLetters.includes(letter)) {
           setWrongLetters([...wrongLetters, letter]);
           setAttempts(attempts - 1);
-          displayHangman();
-          displayWrongLetters();
           checkLoss();
         }
       }
     }
   };
 
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyPress);
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [guessedWord, wrongLetters, attempts]);
+
   return (
     <div className="App">
+      <Link to="/">
+        <button className="home-btn">Home</button>
+      </Link>
       <div id="inicial">
-        <div id="palabra"></div>
-        <div id="Ahorcado"></div>
-        <div id="letras_dichas"></div>
-        <p id="mensaje"></p>
+        <div id="palabra">
+          <span>{displayWord()}</span>
+        </div>
+        <div id="Ahorcado" style={{ backgroundImage: displayHangman() }}></div>
+        <div id="letras_dichas">
+          <p>{displayWrongLetters()}</p>
+        </div>
+        <p id="mensaje" style={{ color: message.includes("Ganaste") ? 'green' : 'red' }}>{message}</p>
+        
+        <button onClick={resetGame}>Reiniciar Juego</button>
       </div>
     </div>
   );

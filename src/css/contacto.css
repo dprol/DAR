@@ -1,0 +1,60 @@
+/* Contacto.css */
+
+.d-flex {
+    /* Si d-flex no está definido en Bootstrap, puedes ajustar según sea necesario */
+    display: flex;
+  }
+  
+  .flex-column {
+    flex-direction: column;
+  }
+  
+  .justify-content-center {
+    justify-content: center;
+  }
+  
+  .align-items-center {
+    align-items: center;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .card-contacto {
+    /* Estilos específicos para tu tarjeta de contacto */
+  }
+  
+  .align-items-center {
+    /* Estilos específicos para el cuerpo de la tarjeta */
+  }
+  
+  .form-container {
+    margin-top: 20px; /* Ajusta según sea necesario */
+  }
+  
+  .error-message {
+    color: red;
+    font-weight: bold;
+  }
+  
+  .success-message {
+    color: green;
+    font-weight: bold;
+  }  
+  button.home-btn {
+    background-color: #3498db; 
+    color: #fff; 
+    padding: 10px 15px; 
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    left: 10px; 
+  }
+  
+  button.home-btn:hover {
+    background-color: #2980b9;
+  }  

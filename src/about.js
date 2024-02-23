@@ -1,17 +1,20 @@
 import React from "react";
 import { Card, Col, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import "./css/about.css";
 import snake from './img/juegos/snake.png';
 import tictac from './img/juegos/tictac.png';
 import tetris from './img/juegos/tetris.png';
 import pacman from './img/juegos/pacman.png';
 import mario from './img/juegos/mario.png'
 import adivina from './img/juegos/adivina.png'
-import { Link } from "react-router-dom";
-
 
 const About = () => {
   return (
-    <div style={{marginBottom:'100px'}}>
+    <div className="about-container">
+      <Link to="/">
+        <button className="home-btn">Home</button>
+      </Link>
       <h1>Juegos Retro</h1>
 
       <Row xs={1} md={4} className="g-4">
@@ -38,7 +41,7 @@ const About = () => {
           <Card>
             <Card.Img variant="top" src={tictac} />
             <Card.Body>
-              <Card.Title>Tres en línea</Card.Title>
+              <Card.Title>Tres en raya</Card.Title>
               <Card.Text className="card-text">
               El juego del gato o tres en raya es un juego de lápiz y papel para dos jugadores, X y O, que marcan las casillas de un cuadrado de 3×3. El jugador que consiga colocar tres de sus símbolos en línea horizontal, vertical o diagonal gana el juego.
               </Card.Text>

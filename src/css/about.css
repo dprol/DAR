@@ -1,0 +1,61 @@
+.about-container {
+  text-align: center;
+  margin-bottom: 100px;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+.card {
+  height: 100%; /* Mantén la altura al 100% para que las cartas ocupen toda la altura del contenedor */
+  margin-bottom: 20px; /* Añade margen inferior para separar las cartas */
+}
+
+.card-img-top {
+  object-fit: cover;
+  height: 150px; /* Ajusta la altura deseada para todas las imágenes */
+}
+
+.card-title {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.card-text {
+  font-size: 0.9rem;
+}
+
+.card-link {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.card-link:hover {
+  text-decoration: underline;
+}
+
+.home-button {
+  color: white;
+  background-color: blue;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+button.home-btn {
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+button.home-btn:hover {
+  background-color: #2980b9;
+}

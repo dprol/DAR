@@ -1,51 +1,79 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: sans-serif;
+/* Estilo del contenedor principal del juego */
+
+.snake-background {
+  position: fixed; /* Fija el fondo para que cubra toda la pantalla */
+  top: 0;
+  left: 0;
+  width: 100vw; /* Ancho total de la ventana */
+  height: 100vh; /* Altura total de la ventana */
+  background-image: url('/src/imagenes/snake/imagen1.png');
+  background-size: cover;
+  background-position: center;
+  z-index: -1; /* Asegura que el fondo quede detrás de todo lo demás */
 }
 
-body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background-color: #66ff66;
+.game-container {
+  text-align: center;
 }
 
-.wrapper {
-    width: 65vmin;
-    height: 70vmin;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    border-radius: 5px;
-    background-color: #293447;
+/* Estilo del tablero del juego */
+.game-board {
+  position: relative;
+  margin: 0 auto; /* Centra el tablero */
+  border: 2px solid black; /* Borde más grueso y visible */
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
-.game-details {
-    color: #9900cc;
-    font-size: 1.2rem;
-    font-weight: 500;
-    padding: 20px 27px;
-    display: flex;
-    justify-content: space-between;
+/* Estilos generales para segmentos de la serpiente y la comida */
+.game-piece {
+  position: absolute;
+  box-sizing: border-box;
 }
 
-.play-board {
-    width: 100%;
-    height: 100%;
-    background: #212837;
-    display: grid;
-    grid-template: repeat(30, 1fr) / repeat(30, 1fr);
+/* Estilo específico para la cabeza de la serpiente */
+.snake-head {
+  background-color: green;
 }
 
-.play-board .food {
-    background: #ff003d;
-    border-radius: 50%;
+/* Estilo específico para el cuerpo de la serpiente */
+.snake-body {
+  background-color: black;
 }
 
-.play-board .head {
-    background: #60cbff;
-    border-radius: 15%;
+/* Estilo para la comida */
+.food {
+  background-color: red;
 }
+
+.reiniciar-btn {
+  background-color: #4CAF50; /* Color de fondo */
+  color: white; /* Color del texto */
+  padding: 10px 20px; /* Relleno alrededor del texto */
+  margin: 10px 0; /* Margen alrededor del botón */
+  border: none; /* Sin borde */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* Cursor en forma de mano al pasar sobre el botón */
+  font-size: 16px; /* Tamaño del texto */
+}
+
+.reiniciar-btn:hover {
+  background-color: #45a049; /* Color de fondo al pasar el mouse */
+}
+
+button.home-btn {
+  background-color: #3498db; 
+  color: #fff; 
+  padding: 10px 15px; 
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  left: 10px; 
+}
+
+button.home-btn:hover {
+  background-color: #2980b9;
+}  
+

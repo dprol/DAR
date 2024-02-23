@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useForm, ValidationError } from '@formspree/react';
 import { Card, Form, Button, Row, Col } from "react-bootstrap";
-
+import '../css/contacto.css';
+import { Link } from 'react-router-dom';
 
 function Contacto() {
   const [state, handleSubmit] = useForm("mpzeqdno");
@@ -9,37 +10,34 @@ function Contacto() {
   const [message, setMessage] = useState("");
   const [name, setName] = useState("");
 
-  const handleEmailChange = e => setEmail(e.target.value);
-  const handleMessageChange = e => setMessage(e.target.value);
-  const handleNameChange = e => setName(e.target.value);
-
-  
+  const handleEmailChange = (e) => setEmail(e.target.value);
+  const handleMessageChange = (e) => setMessage(e.target.value);
+  const handleNameChange = (e) => setName(e.target.value);
 
   return (
     <div className="d-flex flex-column justify-content-center align-items-center">
-
+      <Link to="/">
+        <button className="home-btn">Home</button>
+      </Link>
       <h1 className="text-center">Contacto</h1>
       
-      <Card className="card-contacto, align-items-center" style={{maxWidth:'800px', backgroundColor:"light"}}>
-        
+      <Card className="card-contacto align-items-center" style={{ maxWidth: '800px', backgroundColor: "light" }}>
         <Card.Body className="align-items-center">
-          
           <Form onSubmit={handleSubmit}>
-
-          <Form.Group as={Row} controlId="formPlaintextName">
+            <Form.Group as={Row} controlId="formPlaintextName">
               <Form.Label column sm="4">
                 Nombre
               </Form.Label>
-              <Col sm="10">
+              <Col sm="8">
                 <Form.Control
-                  type="text" 
+                  type="text"
                   name="name"
                   value={name}
                   onChange={handleNameChange}
                   required
                 />
-                <ValidationError 
-                  prefix="Name" 
+                <ValidationError
+                  prefix="Name"
                   field="name"
                   errors={state.errors}
                 />
@@ -50,16 +48,16 @@ function Contacto() {
               <Form.Label column sm="3">
                 Email
               </Form.Label>
-              <Col sm="10">
+              <Col sm="8">
                 <Form.Control
-                  type="email" 
+                  type="email"
                   name="email"
                   value={email}
                   onChange={handleEmailChange}
                   required
                 />
-                <ValidationError 
-                  prefix="Email" 
+                <ValidationError
+                  prefix="Email"
                   field="email"
                   errors={state.errors}
                 />
@@ -70,7 +68,7 @@ function Contacto() {
               <Form.Label column sm="4">
                 Mensaje
               </Form.Label>
-              <Col sm="10">
+              <Col sm="8">
                 <Form.Control as="textarea"
                   id="message"
                   name="message"
@@ -78,8 +76,8 @@ function Contacto() {
                   onChange={handleMessageChange}
                   required
                 />
-                <ValidationError 
-                  prefix="Message" 
+                <ValidationError
+                  prefix="Message"
                   field="message"
                   errors={state.errors}
                 />
@@ -87,16 +85,18 @@ function Contacto() {
             </Form.Group>
 
             <Form.Group as={Row} className="text-center">
-              <Col sm={{ span: 10, offset: 2 }}>
+              <Col sm={{ span: 8, offset: 4 }}>
                 <Button variant="primary" type="submit" disabled={state.submitting}>
                   Enviar
                 </Button>
-                {state.errors.length > 0 && (
-                  <p>Error: {state.errors[0].message}</p>
-                )}
-                {state.succeeded && (
-                  <p>Formulario enviado con éxito</p>
-                )}
+                {state.errors && state.errors.length > 0 && (
+  <p className="error-message">Error: {state.errors[0].message}</p>
+)}
+
+{state.succeeded && (
+  <p className="success-message">Formulario enviado con éxito</p>
+)}
+
               </Col>
             </Form.Group>
           </Form>
